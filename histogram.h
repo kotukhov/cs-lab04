@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
 vector<double> input_numbers(size_t count);
