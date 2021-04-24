@@ -26,7 +26,7 @@ void svg_rect(double x, double y, double width, double height, string stroke, st
         << "' stroke='" << stroke << "' fill='" << fil << "' />";
 }
 
-void show_histogram_svg(const vector<size_t>& bins)
+void show_histogram_svg(const vector<size_t>& bins, size_t SHIRINA_BLOCKA)
 {
 
     const auto IMAGE_WIDTH = 400;
@@ -35,7 +35,7 @@ void show_histogram_svg(const vector<size_t>& bins)
     const auto TEXT_BASELINE = 20;
     const auto TEXT_WIDTH = 50;
     const auto BIN_HEIGHT = 30;
-    const auto BLOCK_WIDTH = 10;
+    const auto BLOCK_WIDTH = SHIRINA_BLOCKA;
 
     svg_begin(IMAGE_WIDTH, IMAGE_HEIGHT);
 
