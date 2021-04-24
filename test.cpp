@@ -46,7 +46,7 @@ void test_empty_vector()//пустой массив
     assert(max == 0);
 }
 
-int main()
+int main()//тестирование
 {
     test_positive();
     test_negative();
