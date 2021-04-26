@@ -25,7 +25,7 @@ Input read_input(istream& in, bool promt)
     return data;
 }
 
-size_t write_data(void* items, size_t iztem_size, size_t item count, void* ctx)
+size_t write_data(void* items, size_t item_size, size_t item_count, void* ctx)
 {
     size_t data_size = item_size * item_count;
     stringstream* buffer = reinterpret_cast<stringstream*>(ctx);
@@ -43,7 +43,7 @@ Input download(const string& address)
         CURLcode res;
         curl_easy_setopt(curl, CURLOPT_URL, address.c_str());
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-        curl_easy_setopt(curl, CURLOPT_WRITEFATA, &buffer);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &buffer);
         res = curl_easy_perform(curl);
         if (res)
         {

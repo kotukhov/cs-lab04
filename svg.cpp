@@ -81,12 +81,13 @@ string make_info_text ()
     DWORD platform = info >> 16;
     DWORD mask_major = 0x0000ff;
     DWORD version_major = version & mask_major;
-    DWORD version_minor = version >> 8
+    DWORD version_minor = version >> 8;
     if ((info & 0x80000000) == 0)
-    build = platform;
-    else printf("minor_bit = %u.\n", 1)
-    buffer << "Windows v" << version_major << "." << version_minor << " (build " << build << ") | ";
+    {
+       DWORD build = platform;
+       buffer << "Windows v" << version_major << "." << version_minor << " (build " << build << ") | ";
     }
+    else printf("minor_bit = %u.\n", 1);
     char system_dir[MAX_PATH];
     char computer_name[MAX_COMPUTERNAME_LENGTH + 1];
     DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
