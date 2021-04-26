@@ -10,6 +10,8 @@ struct Input {
     size_t bin_count;
 };
 
+size_t write_data(void* items, size_t iztem_size, size_t item count, void* ctx);
+Input download(const string& address);
 vector<double> input_numbers(istream& in, size_t count); // ввод значений
 void find_minmax(vector<double> numbers, double& min, double& max); // нахождение мин. и макс. значения
 vector<size_t> make_histogram(const Input input); // составляет гистограмму
