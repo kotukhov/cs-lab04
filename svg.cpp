@@ -23,7 +23,7 @@ void svg_text(double left, double baseline, string text)
 void svg_rect(double x, double y, double width, double height, string stroke, string fil)
 {
     cout << "<rect x='" << x << "' y='" << y << "' width='" << width << "' height='" << height
-        << "' stroke='" << stroke << "' fill='" << fil << "' />";
+         << "' stroke='" << stroke << "' fill='" << fil << "' />";
 }
 
 void show_histogram_svg(const vector<size_t>& bins, size_t SHIRINA_BLOCKA)
@@ -76,25 +76,22 @@ string make_info_text ()
     stringstream buffer;
 
     DWORD info = GetVersion();
-DWORD mask = 0x0000ffff;
-DWORD version = info & mask;
-DWORD platform = info >> 16;
-DWORD mask_major = 0x0000ff;
-if ((info & 0x80000000) == 0)
-{
+    DWORD mask = 0x0000ffff;
+    DWORD version = info & mask;
+    DWORD platform = info >> 16;
+    DWORD mask_major = 0x0000ff;
     DWORD version_major = version & mask_major;
     DWORD version_minor = version >> 8
-    DWORD build = platform;
-
+    if ((info & 0x80000000) == 0)
+    build = platform;
+    else printf("minor_bit = %u.\n", 1)
     buffer << "Windows v" << version_major << "." << version_minor << " (build " << build << ") | ";
-
-}
-
-char system_dir[MAX_PATH];
-char computer_name[MAX_COMPUTERNAME_LENGTH + 1];
-DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
-GetComputerNameA(computer_name, &size);
-buffer << "Computer name: " << computer_name;
+    }
+    char system_dir[MAX_PATH];
+    char computer_name[MAX_COMPUTERNAME_LENGTH + 1];
+    DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
+    GetComputerNameA(computer_name, &size);
+    buffer << "Computer name: " << computer_name;
 
     return buffer.str();
 }
