@@ -5,22 +5,19 @@
 #include <curl/curl.h>
 #include <sstream>
 #include <string>
+#include <windows.h>
 
 using namespace std;
 
-
-Input
-download(const string& address) {
-    stringstream buffer;
-
-    // TODO: заполнить буфер.
-
-    return read_input(buffer, false);
-}
-
 int main(int argc, char* argv[])
 {
-    curl_global_init(CURL_GLOBAL_ALL);
+
+    /*
+    const char* name = "Commander Shepard";
+int year = 2154;
+printf("%s was born in %d.\n", name, year);
+// Commander Shepard was born in 2154.
+    */
     Input input;
     if (argc > 1)
     {
@@ -32,7 +29,9 @@ int main(int argc, char* argv[])
         input = read_input(cin, true);
 
     }
-
+    printf("Windows (decimal) version is %u.\n", GetVersion());
+    printf("Windows (16x) version is %x. \n", GetVersion());
+    return 0;
 
     input = read_input(cin, true);
     const auto bins = make_histogram(input);
