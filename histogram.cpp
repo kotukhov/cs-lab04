@@ -1,5 +1,7 @@
 #include "histogram.h"
 
+
+
 Input read_input(istream& in, bool promt)
 {
     Input data;

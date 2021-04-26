@@ -2,12 +2,38 @@
 #include <vector>
 #include "histogram.h"
 #include "svg.h"
+#include <curl/curl.h>
+#include <sstream>
+#include <string>
 
 using namespace std;
 
-int main()
+
+Input
+download(const string& address) {
+    stringstream buffer;
+
+    // TODO: заполнить буфер.
+
+    return read_input(buffer, false);
+}
+
+int main(int argc, char* argv[])
 {
+    curl_global_init(CURL_GLOBAL_ALL);
     Input input;
+    if (argc > 1)
+    {
+        // работа с cURL
+        input = download(argv[1]);
+    }
+    else
+    {
+        input = read_input(cin, true);
+
+    }
+
+
     input = read_input(cin, true);
     const auto bins = make_histogram(input);
     size_t F;
