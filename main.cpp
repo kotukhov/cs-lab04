@@ -12,6 +12,17 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 
+DWORD info = GetVersion();
+DWORD mask = 0x0000ffff;
+DWORD version = info & mask;
+DWORD platform = info >> 16;
+DWORD mask_major = 0x0000ff;
+DWORD version_minor = version >> 8;
+printf ("Windows version is %u.\n", version)
+printf ("Version Major is %u.\n", version_major;
+printf ("Version Minor is %u.\n", version_minor;
+return 0;
+
     Input input;
     if (argc > 1)
     {
