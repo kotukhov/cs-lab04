@@ -22,8 +22,15 @@ if ((info & 0x80000000) == 0)
     DWORD version_major = version & mask_major;
     DWORD version_minor = version >> 8
     DWORD build = platform;
-    printf("Windows v%u.%u (build %u)", version_major, version_minor, build);
+    printf("Windows v%u.%u (build %u)\n", version_major, version_minor, build);
 }
+
+char system_dir[MAX_PATH];
+char computer_name[MAX_COMPUTERNAME_LENGTH + 1];
+DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
+GetComputerNameA(computer_name, &size);
+printf("Computer name %s\n", computer_name);
+
 return 0;
 
     Input input;
