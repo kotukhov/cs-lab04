@@ -12,12 +12,6 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 
-    /*
-    const char* name = "Commander Shepard";
-int year = 2154;
-printf("%s was born in %d.\n", name, year);
-// Commander Shepard was born in 2154.
-    */
     Input input;
     if (argc > 1)
     {
@@ -29,9 +23,6 @@ printf("%s was born in %d.\n", name, year);
         input = read_input(cin, true);
 
     }
-    printf("Windows (decimal) version is %u.\n", GetVersion());
-    printf("Windows (16x) version is %x. \n", GetVersion());
-    return 0;
 
     input = read_input(cin, true);
     const auto bins = make_histogram(input);
