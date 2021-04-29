@@ -1,5 +1,5 @@
 #include "histogram.h"
-
+#include <curl/curl.h>
 
 
 Input read_input(istream& in, bool promt)
@@ -36,6 +36,7 @@ size_t write_data(void* items, size_t item_size, size_t item_count, void* ctx)
 Input download(const string& address)
 {
     stringstream buffer;
+
     curl_global_init(CURL_GLOBAL_ALL);
     CURL* curl = curl_easy_init();
     if (curl)

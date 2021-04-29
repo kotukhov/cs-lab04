@@ -13,11 +13,6 @@ struct Input
     size_t bin_count;
 };
 
-struct Configurations
-{
-    bool UseHint;
-    char UrlPage;
-};
 
 size_t write_data(void* items, size_t iztem_size, size_t item_count, void* ctx);
 Input download(const string& address);
