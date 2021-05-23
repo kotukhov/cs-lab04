@@ -33,7 +33,7 @@
 			<Add directory="curl/include" />
 		</Compiler>
 		<Linker>
-			<Add library="libcurl.dll.a" />
+			<Add library="libcurl.a" />
 			<Add directory="curl/lib" />
 		</Linker>
 		<Unit filename="histogram.cpp" />

@@ -2,7 +2,7 @@
 #include <curl/curl.h>
 
 
-Input read_input(istream& in, bool promt)
+Input read_input(istream& in /* произвольный поток ввода  */, bool promt)  // numbers и bin_count должны храниться и передаваться вместе
 {
     Input data;
     if (promt)
@@ -25,20 +25,20 @@ Input read_input(istream& in, bool promt)
     return data;
 }
 
-size_t write_data(void* items, size_t item_size, size_t item_count, void* ctx)
+size_t write_data(void* items /* указатель на принятые данные */, size_t item_size /* размер одного блока данных  */, size_t item_count /* количество блоков данных */, void* ctx /*   */) // call-back функция
 {
-    size_t data_size = item_size * item_count;
+    size_t data_size = item_size * item_count; // вычисление количества принятых байтов
     stringstream* buffer = reinterpret_cast<stringstream*>(ctx);
-    (*buffer).write(reinterpret_cast<const char*>(items), data_size);
+    (*buffer).write(reinterpret_cast<const char*>(items), data_size); // добавляем данные в буфер // buffer -> write(...)
     return data_size;
 }
 
-Input download(const string& address)
+Input download(const string& address) // принимает строку с адресом файла
 {
-    stringstream buffer;
+    stringstream buffer; // поток который читает инф. из буффера
 
     curl_global_init(CURL_GLOBAL_ALL);
-    CURL* curl = curl_easy_init();
+    CURL* curl = curl_easy_init(); //функция создания дескриптора
     if (curl)
     {
         CURLcode res;
@@ -48,7 +48,7 @@ Input download(const string& address)
         res = curl_easy_perform(curl);
         if (res)
         {
-            cerr << curl_easy_strerror(res) << endl;
+            cerr << curl_easy_strerror(res) /* принимает код ошибки и возвращает строку с текстом ошибки  */ << endl;
             exit(1);
         }
     }

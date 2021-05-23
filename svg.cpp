@@ -75,14 +75,14 @@ string make_info_text ()
 {
     stringstream buffer;
 
-    DWORD info = GetVersion();
-    DWORD mask = 0x0000ffff;
+    DWORD /* тип возврщаемого значени€ double word 4 байта */ info = GetVersion(); // команда позвол€ет получить номер версии Windows
+    DWORD mask = 0x0000ffff; // маска дл€ получени€ версии
     DWORD version = info & mask;
-    DWORD platform = info >> 16;
+    DWORD platform = info >> 16; // сдвиг вправо на 16 бит
     DWORD mask_major = 0x0000ff;
     DWORD version_major = version & mask_major;
     DWORD version_minor = version >> 8;
-    if ((info & 0x80000000) == 0)
+    if ((info & 0x80000000) == 0) // проверка что старший бит = 0
     {
        DWORD build = platform;
        buffer << "Windows v" << version_major << "." << version_minor << " (build " << build << ") | ";
@@ -91,8 +91,8 @@ string make_info_text ()
     char system_dir[MAX_PATH];
     char computer_name[MAX_COMPUTERNAME_LENGTH + 1];
     DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
-    GetComputerNameA(computer_name, &size);
-    buffer << "Computer name: " << computer_name;
+    GetComputerNameA(computer_name, &size); // получение имени компьютера
+    buffer << /* поток, поэтому << */ "Computer name: " << computer_name;
 
     return buffer.str();
 }
