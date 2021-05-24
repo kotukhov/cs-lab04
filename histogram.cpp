@@ -53,7 +53,6 @@ Input download(const string& address) // принимает строку с адресом файла
         }
     }
     curl_easy_cleanup(curl);
-
     return read_input(buffer, false);
 }
 

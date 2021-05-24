@@ -1,4 +1,5 @@
 #include "svg.h"
+#include <windows.h>
 
 void svg_begin(double width, double height)
 {
@@ -26,9 +27,35 @@ void svg_rect(double x, double y, double width, double height, string stroke, st
          << "' stroke='" << stroke << "' fill='" << fil << "' />";
 }
 
+string make_info_text()
+{
+    stringstream buffer;
+
+    DWORD /* тип возврщаемого значени€ double word 4 байта */ info = GetVersion(); // команда позвол€ет получить номер версии Windows
+    DWORD mask = 0x0000ffff; // маска дл€ получени€ версии
+    DWORD version = info & mask;
+    DWORD platform = info >> 16; // сдвиг вправо на 16 бит
+    DWORD mask_major = 0x0000ff;
+    DWORD version_major = version & mask_major;
+    DWORD version_minor = version >> 8;
+    if ((info & 0x80000000) == 0) // проверка что старший бит = 0
+    {
+       DWORD build = platform;
+       buffer << "Windows v" << version_major << "." << version_minor << " (build " << build << ") | ";
+    }
+    else printf("minor_bit = %u.\n", 1);
+    char system_dir[MAX_PATH];
+    char computer_name[MAX_COMPUTERNAME_LENGTH + 1];
+    DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
+    GetComputerNameA(computer_name, &size); // получение имени компьютера
+    buffer << /* поток, поэтому << */ "Computer name: " << computer_name;
+
+    return buffer.str();
+}
+
+
 void show_histogram_svg(const vector<size_t>& bins, size_t SHIRINA_BLOCKA)
 {
-
     const auto IMAGE_WIDTH = 400;
     const auto IMAGE_HEIGHT = 300;
     const auto TEXT_LEFT = 20;
@@ -62,37 +89,12 @@ void show_histogram_svg(const vector<size_t>& bins, size_t SHIRINA_BLOCKA)
             bin_koeff = (size_t)(bin * koeff);
         }
         const double bin_width = BLOCK_WIDTH * bin_koeff;
-
         svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(bin));
         svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, "red", "#ffeeee");
         top += BIN_HEIGHT;
     }
-
+    string Info=make_info_text();
+    svg_text (TEXT_LEFT, top + TEXT_BASELINE,Info);
     svg_end();
 }
 
-string make_info_text ()
-{
-    stringstream buffer;
-
-    DWORD /* тип возврщаемого значени€ double word 4 байта */ info = GetVersion(); // команда позвол€ет получить номер версии Windows
-    DWORD mask = 0x0000ffff; // маска дл€ получени€ версии
-    DWORD version = info & mask;
-    DWORD platform = info >> 16; // сдвиг вправо на 16 бит
-    DWORD mask_major = 0x0000ff;
-    DWORD version_major = version & mask_major;
-    DWORD version_minor = version >> 8;
-    if ((info & 0x80000000) == 0) // проверка что старший бит = 0
-    {
-       DWORD build = platform;
-       buffer << "Windows v" << version_major << "." << version_minor << " (build " << build << ") | ";
-    }
-    else printf("minor_bit = %u.\n", 1);
-    char system_dir[MAX_PATH];
-    char computer_name[MAX_COMPUTERNAME_LENGTH + 1];
-    DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
-    GetComputerNameA(computer_name, &size); // получение имени компьютера
-    buffer << /* поток, поэтому << */ "Computer name: " << computer_name;
-
-    return buffer.str();
-}
