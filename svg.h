@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream>
 #include <windows.h>
+#include <curl/curl.h>
 
 using namespace std;
 
