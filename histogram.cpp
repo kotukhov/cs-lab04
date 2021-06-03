@@ -1,7 +1,6 @@
 #include "histogram.h"
 #include <curl/curl.h>
 
-
 Input read_input(istream& in /* произвольный поток ввода  */, bool promt)  // numbers и bin_count должны храниться и передаваться вместе
 {
     Input data;

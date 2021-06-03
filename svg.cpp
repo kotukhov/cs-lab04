@@ -47,17 +47,19 @@ string make_info_text()
     char system_dir[MAX_PATH];
     char computer_name[MAX_COMPUTERNAME_LENGTH + 1];
     DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
+    curl_version_info_data* inform = curl_version_info(CURLVERSION_NOW);
+    // curl_version_info_data *c = curl_version_info.ssl_version;
+    // const char s[100] = d.ssl_version;
     GetComputerNameA(computer_name, &size); // получение имени компьютера
     buffer << /* поток, поэтому << */ "Computer name: " << computer_name;
-
+    buffer << "| cURL Version: " << inform->version << " |" << " Open SSL Version: " << inform->ssl_version;
     return buffer.str();
 }
 
-
 void show_histogram_svg(const vector<size_t>& bins, size_t SHIRINA_BLOCKA)
 {
-    const auto IMAGE_WIDTH = 400;
-    const auto IMAGE_HEIGHT = 300;
+    const auto IMAGE_WIDTH = 4000;
+    const auto IMAGE_HEIGHT = 3000;
     const auto TEXT_LEFT = 20;
     const auto TEXT_BASELINE = 20;
     const auto TEXT_WIDTH = 50;

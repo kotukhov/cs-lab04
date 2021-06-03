@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     }
     const auto bins = make_histogram(input);
     size_t F;
-    cerr << "Enter BLOCK_WIDTH behind 3 and 30";
+    cerr << "Enter BLOCK_WIDTH behind 3 and 30" << endl;
     cin >> F;
     show_histogram_svg(bins, F);
     return 0;
